@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class LoggingAspect {
-    @Before("execution(public String getName())")
-    public void LoggingAdvisory(){
-        System.out.println("Advisory : getName method is called");
+    @Before("execution( * AOP.*.get*(..))")
+    private void LoggingAdvisory(){
+        System.out.println("Advisory : get method is called");
     }
 }
