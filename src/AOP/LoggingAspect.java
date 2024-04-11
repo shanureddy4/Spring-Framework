@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class LoggingAspect {
-    @Before("allgetter()")
+    @Before("allMethods() && allgetter()")
     public void LoggingAdvisory(){
         System.out.println("Advisory : get method is called");
     }
@@ -18,6 +18,11 @@ public class LoggingAspect {
         System.out.println("some advisory");
     }
 
-    @Pointcut("execution( * AOP.*.get*(..))")
+    @Pointcut("execution(* AOP.*.get*(..))")
     public void allgetter(){}
+
+    @Pointcut("within(AOP.Circle)")
+    public void allMethods(){}
+
+
 }
