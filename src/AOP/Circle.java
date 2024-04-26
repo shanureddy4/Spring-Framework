@@ -3,6 +3,7 @@ package AOP;
 public class Circle {
     private String name;
 
+    @Logging
     public String getName() {
         return name;
     }

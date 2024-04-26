@@ -14,16 +14,17 @@ public class LoggingAspect {
 //        System.out.println("Advisory : get method is called");
 //    }
 
-    @AfterReturning(pointcut="args(name)" , returning="returnString")
-    public void argsofMethod(String name, String returnString){
-        System.out.println("arg input is "+ name+ " output is "+ returnString);
-    }
-    @AfterThrowing(pointcut="args(name)" , throwing="ex")
-    public void throwsarg(String name, RuntimeException ex){
-        System.out.println("Exception "+ ex);
-    }
 
-    @Around("allgetter()")
+//    @AfterReturning(pointcut="args(name)" , returning="returnString")
+//    public void argsofMethod(String name, String returnString){
+//        System.out.println("arg input is "+ name+ " output is "+ returnString);
+//    }
+//    @AfterThrowing(pointcut="args(name)" , throwing="ex")
+//    public void throwsarg(String name, RuntimeException ex){
+//        System.out.println("Exception "+ ex);
+//    }
+
+    @Around("@annotation(Logging)")
     public Object aroundMethod(ProceedingJoinPoint proceedingJoinPoint){
     Object object = null;
         try{
@@ -43,8 +44,8 @@ public class LoggingAspect {
 //        System.out.println("some advisory");
 //    }
 //
-    @Pointcut("execution(* AOP.Circle.get*(..))")
-    public void allgetter(){}
+//    @Pointcut("execution(* AOP.Circle.get*(..))")
+//    public void allgetter(){}
 
 //    @Pointcut("within(AOP.Circle)")
 //    public void allMethods(){}
