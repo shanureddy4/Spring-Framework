@@ -1,6 +1,7 @@
 package AOP;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
@@ -22,14 +23,29 @@ public class LoggingAspect {
         System.out.println("Exception "+ ex);
     }
 
+    @Around("allgetter()")
+    public Object aroundMethod(ProceedingJoinPoint proceedingJoinPoint){
+    Object object = null;
+        try{
+            System.out.println("Before running");
+        object = proceedingJoinPoint.proceed();
+            System.out.println("After running");
+
+        }catch (Throwable e){
+            System.out.println("After throwing");
+        }
+        System.out.println("After finally");
+        return object;
+    }
+
 //    @Before("allgetter()")
 //    public void AnotherLoggingAdvisory(){
 //        System.out.println("some advisory");
 //    }
 //
-//    @Pointcut("execution(* AOP.Circle.get*(..))")
-//    public void allgetter(){}
-//
+    @Pointcut("execution(* AOP.Circle.get*(..))")
+    public void allgetter(){}
+
 //    @Pointcut("within(AOP.Circle)")
 //    public void allMethods(){}
 
