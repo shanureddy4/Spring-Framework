@@ -5,9 +5,25 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
-@Component
-@Aspect
 public class LoggingAspect {
+
+    public Object aroundMethod(ProceedingJoinPoint proceedingJoinPoint){
+    Object object = null;
+        try{
+            System.out.println("Before running");
+        object = proceedingJoinPoint.proceed();
+            System.out.println("After running");
+
+        }catch (Throwable e){
+            System.out.println("After throwing");
+        }
+        System.out.println("After finally");
+        return object;
+    }
+
+
+//    @Pointcut("within(AOP.Circle)")
+//    public void allMethods(){}
 //    @Before("allgetter()")
 //    public void LoggingAdvisory(JoinPoint joinPoint){
 //        Circle circle = (Circle) joinPoint.getTarget();
@@ -24,31 +40,11 @@ public class LoggingAspect {
 //        System.out.println("Exception "+ ex);
 //    }
 
-    @Around("@annotation(Logging)")
-    public Object aroundMethod(ProceedingJoinPoint proceedingJoinPoint){
-    Object object = null;
-        try{
-            System.out.println("Before running");
-        object = proceedingJoinPoint.proceed();
-            System.out.println("After running");
-
-        }catch (Throwable e){
-            System.out.println("After throwing");
-        }
-        System.out.println("After finally");
-        return object;
-    }
 
 //    @Before("allgetter()")
 //    public void AnotherLoggingAdvisory(){
 //        System.out.println("some advisory");
 //    }
 //
-//    @Pointcut("execution(* AOP.Circle.get*(..))")
-//    public void allgetter(){}
-
-//    @Pointcut("within(AOP.Circle)")
-//    public void allMethods(){}
-
 
 }

@@ -18,6 +18,11 @@
     </bean>
 <bean id="shapeService" class="AOP.ShapeService" autowire="byName"/>
     <!-- Define an aspect -->
-<context:component-scan base-package="AOP"/>
+<bean name="loggingAspect" class="AOP.LoggingAspect"/>
+<aop:config>
+    <aop:aspect id="loggingAspect" ref="loggingAspect">
+    <aop:around pointcut="execution(* AOP.Circle.get*(..))" method="aroundMethod"  />
+    </aop:aspect>
+</aop:config>
 
 </beans>
