@@ -21,6 +21,10 @@ public class LoggingAspect {
         return object;
     }
 
+    public void testProxy(){
+        System.out.println("inside aspect");
+    }
+
 
 //    @Pointcut("within(AOP.Circle)")
 //    public void allMethods(){}
